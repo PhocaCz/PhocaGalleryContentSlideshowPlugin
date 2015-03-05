@@ -1,0 +1,1 @@
+Phoca Gallery Content Slideshow Plugin is Joomla! CMS extension. Plugin which displays a slideshow of Phoca Gallery images in article.
