@@ -1,0 +1,16 @@
+{
+	"author": "Jan Pavelka (www.phoca.cz)",
+	"authorUrl": "https://www.phoca.cz",
+	"copyright": "Jan Pavelka",
+	"license": "GNU/GPL",
+	"projectName": "PhocaGalleryContentSlideshowPlugin",
+	"extensionName": "Phoca Gallery Content Slideshow Plugin",
+	"projectInitials" : "PG",				  
+	"description": "Phoca Gallery Content Slideshow Plugin is a Joomla! plugin which displays slideshow of images from selected Phoca Gallery category in an article content.",
+	"projectUrl": "https://www.phoca.cz/phocagallery-slideshow-plugin",
+	"projectDocumentationUrl": "https://www.phoca.cz/documentation/category/19-phoca-gallery-slideshow-plugin",
+	"projectDemo" : {
+		"Joomla! 1.5 Demo": "https://www.phoca.cz/demo/"
+	},
+	"projectColor": "#95313e"
+}

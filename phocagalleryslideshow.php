@@ -6,48 +6,61 @@
  * @copyright Copyright (C) Jan Pavelka www.phoca.cz
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
- 
+
 defined('_JEXEC') or die('Restricted access');
-if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+
 jimport('joomla.plugin.plugin');
-if (!JComponentHelper::isEnabled('com_phocagallery', true)) {
-	return JError::raiseError(JText::_('PLG_CONTENT_PHOCAGALLERYSLIDESHOW_PHOCA_GALLERY_ERROR'), JText::_('PLG_CONTENT_PHOCAGALLERYSLIDESHOW_PHOCA_GALLERY_IS_NOT_INSTALLED_ON_YOUR_SYSTEM'));
-}
 
-if (! class_exists('PhocaGalleryLoader')) {
-    require_once( JPATH_ADMINISTRATOR.DS.'components'.DS.'com_phocagallery'.DS.'libraries'.DS.'loader.php');
-}
-
-phocagalleryimport('phocagallery.path.path');
-phocagalleryimport('phocagallery.path.route');
-phocagalleryimport('phocagallery.file.file');
-phocagalleryimport('phocagallery.text.text');
-phocagalleryimport('phocagallery.file.filethumbnail');
-phocagalleryimport('phocagallery.ordering.ordering');
 
 class plgContentPhocaGallerySlideshow extends JPlugin
-{	
+{
 	public function __construct(& $subject, $config) {
 		parent::__construct($subject, $config);
 		$this->loadLanguage();
 	}
 
 	public function onContentPrepare($context, &$article, &$params, $page = 0) {
-		
-		
+
+
 		if ($context == 'com_finder.indexer') {
 			return true;
 		}
-		
+
+        // Include Phoca Gallery
+        if (!JComponentHelper::isEnabled('com_phocagallery', true)) {
+            echo '<div class="alert alert-danger">Phoca Gallery Error: Phoca Gallery component is not installed or not published on your system</div>';
+            return;
+        }
+
+        if (!class_exists('PhocaGalleryLoader')) {
+            require_once( JPATH_ADMINISTRATOR.'/components/com_phocagallery/libraries/loader.php');
+        }
+
+        phocagalleryimport('phocagallery.path.path');
+        phocagalleryimport('phocagallery.path.route');
+        phocagalleryimport('phocagallery.library.library');
+        phocagalleryimport('phocagallery.text.text');
+        phocagalleryimport('phocagallery.access.access');
+        phocagalleryimport('phocagallery.file.file');
+        phocagalleryimport('phocagallery.file.filethumbnail');
+        phocagalleryimport('phocagallery.image.image');
+        phocagalleryimport('phocagallery.image.imagefront');
+        phocagalleryimport('phocagallery.render.renderfront');
+        phocagalleryimport('phocagallery.render.renderadmin');
+        phocagalleryimport('phocagallery.render.renderdetailwindow');
+        phocagalleryimport('phocagallery.ordering.ordering');
+        phocagalleryimport('phocagallery.picasa.picasa');
+        phocagalleryimport('phocagallery.html.category');
+
 		$db 		= JFactory::getDBO();
 		$document	= JFactory::getDocument();
 		$path 		= PhocaGalleryPath::getPath();
 		//$menu 		= &JSite::getMenu();
 		$app 		= JFactory::getApplication('site');
-		$view		= JRequest::getCmd('view');
-		$layout		= JRequest::getCmd('layout');
-		
-		
+		$view		= $app->input->get('view');
+		$layout		= $app->input->get('layout');
+
+
 		$component			=	'com_phocagallery';
 		$paramsC			= JComponentHelper::getParams($component) ;
 
@@ -58,7 +71,7 @@ class plgContentPhocaGallerySlideshow extends JPlugin
 		$count_matches	= preg_match_all($regex_all,$article->text,$matches,PREG_OFFSET_CAPTURE | PREG_PATTERN_ORDER);
 		$customCSS		= '';
 		$customCSS2		= '';
-		
+
 		for($j = 0; $j < $count_matches; $j++) {
 			// Plugin variables
 			$id						= 0;
@@ -71,7 +84,7 @@ class plgContentPhocaGallerySlideshow extends JPlugin
 			$desc					= 'peekaboo';
 			$random					= 0;
 			$pause					= 2500;
-			
+
 			// Get plugin parameters
 			$phocagallery	= $matches[0][$j][0];
 			preg_match($regex_one,$phocagallery,$phocagallery_parts);
@@ -79,12 +92,12 @@ class plgContentPhocaGallerySlideshow extends JPlugin
 			$values_replace = array ("/^'/", "/'$/", "/^&#39;/", "/&#39;$/", "/<br \/>/");
 
 			foreach($parts as $key => $value) {
-				
+
 				$values = explode("=", $value, 2);
 				foreach ($values_replace as $key2 => $values2) {
 					$values = preg_replace($values2, '', $values);
 				}
-				
+
 				// Get plugin parameters from article
 				if($values[0]=='id')					{$id					= $values[1];}
 				else if($values[0]=='height')			{$height				= $values[1];}
@@ -97,16 +110,22 @@ class plgContentPhocaGallerySlideshow extends JPlugin
 				else if($values[0]=='pgslink')			{$tmpl['pgslink']		= $values[1];}
 				else if($values[0]=='imageordering')	{$tmpl['imageordering']	= $values[1];}
 			}
-			
+
 			if ($id > 0) {
-			
+
+
+				//PhocaGalleryRenderFront::renderAllCSS();
+
+				$lang = JFactory::getLanguage();
+			$lang->load('com_phocagallery');
+
 				$orderingString=PhocaGalleryOrdering::getOrderingString($tmpl['imageordering']);
 				$imageOrdering =$orderingString['output'];
-				
-			
+
+
 				//$c = time() * rand(1,10);
-				//$c = time() * mt_rand(1,1000); 
-				$c = time() . mt_rand();				
+				//$c = time() * mt_rand(1,1000);
+				$c = time() . mt_rand();
 				$query     = ' SELECT a.filename, cc.id as catid, cc.alias as catalias, a.extid, a.exts, a.extm, a.extl, a.exto, a.description,'
 						   . ' CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(\':\', cc.id, cc.alias) ELSE cc.id END as catslug'
 						   . ' FROM #__phocagallery_categories AS cc'
@@ -119,8 +138,8 @@ class plgContentPhocaGallerySlideshow extends JPlugin
 						   . $imageOrdering;
 				$db->setQuery($query);
 				$images = $db->loadObjectList();
-			
-				
+
+
 // START OUTPUT
 
 $jsSlideshowData['files'] = '';
@@ -128,7 +147,7 @@ $countImg 	= 0;
 $endComma	= ',';
 $output 	= '';
 if (!empty($images)) {
-	
+
 	$countFilename = count($images);
 	foreach ($images as $key => $value) {
 
@@ -147,13 +166,13 @@ if (!empty($images)) {
 				$imageName->ext = $value->exts;
 				$sizeString = 's';
 			break;
-			
+
 			case 'M':
 				$imageName = PhocaGalleryFileThumbnail::getThumbnailName($value->filename, 'medium');
 				$imageName->ext = $value->extm;
 				$sizeString = 'm';
 			break;
-			
+
 			case 'O':
 				$imageName		= new stdClass();
 				$imageName->rel = PhocaGalleryFile::getFileOriginal($value->filename , 1);
@@ -161,7 +180,7 @@ if (!empty($images)) {
 				$imageName->ext = $value->exto;
 				$sizeString = 'l';
 			break;
-			
+
 			case 'L':
 			default:
 				$imageName = PhocaGalleryFileThumbnail::getThumbnailName($value->filename, 'large');
@@ -169,15 +188,15 @@ if (!empty($images)) {
 				$sizeString = 'l';
 			break;
 		}
-		
+
 
 		if (isset($value->extl) && $value->extl != '') {
-			$jsSlideshowData['files'] .= '["'. $imageName->ext .'", "", "", "'.$description.'"]'.$endComma."\n"; 
+			$jsSlideshowData['files'] .= '["'. $imageName->ext .'", "", "", "'.$description.'"]'.$endComma."\n";
 		} else {
 			$imgLink		= JURI::base(true) . '/' . $imageName->rel;
-			
+
 			if (JFile::exists($imageName->abs)) {
-				$jsSlideshowData['files'] .= '["'. $imgLink .'", "", "", "'.$description.'"]'.$endComma."\n"; ; 
+				$jsSlideshowData['files'] .= '["'. $imgLink .'", "", "", "'.$description.'"]'.$endComma."\n"; ;
 			} else {
 				$fileThumbnail = JURI::base(true).'/' . "components/com_phocagallery/assets/images/phoca_thumb_".
 				$sizeString . "_no_image.png";
@@ -185,8 +204,8 @@ if (!empty($images)) {
 			}
 		}
 	}
-	
-	
+
+
 	//$script  = '<script type="text/javascript">' . "\n";
 	$script  = '/***********************************************' . "\n";
 	$script  .= '* Ultimate Fade In Slideshow v2.0- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)' . "\n";
@@ -195,7 +214,8 @@ if (!empty($images)) {
 	$script  .= '***********************************************/' . "\n";
 	$script  .= 'var phocagalleryplugin'.$c.' = new fadeSlideShow({' . "\n";
 	$script  .= ' wrapperid: "phocaGallerySlideshowP'.$c.'",' . "\n";
-	$script  .= ' dimensions: ['.$width.', '.$height.'],' . "\n";
+	//$script  .= ' dimensions: ['.$width.', '.$height.'],' . "\n";
+	$script  .= ' dimensions: [\'100%\', \'100%\'],' . "\n";
 	$script  .= ' imagearray: ['.$jsSlideshowData['files'].'],' . "\n";
 	$script  .= ' displaymode: {type:\'auto\', pause: '.$pause.', cycles:0,' . "\n";
 	$script  .= ' wraparound:false, randomize: '.$random.'},' . "\n";
@@ -205,8 +225,8 @@ if (!empty($images)) {
 	$script  .= ' togglerid: ""' . "\n";
 	$script  .= '})' . "\n";
 //	$script  .= '</script>' . "\n";
-	
-	
+
+
 	$siteLink = '';
 	if (isset($value->catid)) {
 		if ((int)$tmpl['pgslink'] == 2) {
@@ -217,7 +237,7 @@ if (!empty($images)) {
 			$siteLink = JRoute::_(PhocaGalleryRoute::getCategoryRoute($value->catid, $value->catalias));
 		}
 	}
-	
+
 	// Don't add js in category view
 	//if ($view == 'article' || $view == 'featured' || ($view == 'category' && $layout == 'blog')) {
 	if ($view == 'article' || $view == 'featured' || $view == 'item' ||($view == 'category' && $layout == 'blog')) {
@@ -226,17 +246,17 @@ if (!empty($images)) {
 		$document->addScript(JURI::base(true).'/components/com_phocagallery/assets/fadeslideshow/fadeslideshow.js');
 		$document->addScriptDeclaration($script);
 	}
-	
+
 	$output = '';
-	$output .= '<div class="phocagalleryslideshow">' . "\n";
+	$output .= '<div class="phocagalleryslideshow" style="width:'. $width.'px;height:'.$height .'px;padding:0;margin: auto;">' . "\n";
 	if ($siteLink != '') {
-		$output .= '<a href="'.$siteLink.'" ><div id="phocaGallerySlideshowP'.$c.'"></div></a>'. "\n";
+		$output .= '<a href="'.$siteLink.'" ><div id="phocaGallerySlideshowP'.$c.'" style="max-width:'. $width.'px;max-height:'.$height .'px;padding:0;margin: auto;"></div></a>'. "\n";
 	} else {
-		$output .= '<div id="phocaGallerySlideshowP'.$c.'"></div>';
+		$output .= '<div id="phocaGallerySlideshowP'.$c.'" style="max-width:'. $width.'px;max-height:'.$height .'px;padding:0;margin: auto;"></div>';
 	}
-	
-	$output .='</div>';	
-	
+
+	$output .='</div>';
+
 	$c++;
 } else {
 	$output .= JText::_('PLG_CONTENT_PHOCAGALLERYSLIDESHOW_THERE_IS_NO_IMAGE_OR_CATEGORY_IS_UNPUBLISHED_OR_NOT_AUTHORIZED');
