@@ -2,7 +2,7 @@
 	<update>
 		<name><![CDATA[ Phoca Gallery Content Slideshow Plugin ]]></name>
 		<description><![CDATA[ Phoca Gallery Content Slideshow Plugin is a Joomla! plugin which displays slideshow of images from selected Phoca Gallery category in an article content. ]]></description>
-		<element>plg_content_phocagalleryslideshow</element>
+		<element>phocagalleryslideshow</element>
 		<folder>content</folder>
 		<type>plugin</type>
 		<version>4.3.11</version>
@@ -17,6 +17,6 @@
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
 		<targetplatform name="joomla" version="3.9"/>
-		<client>1</client>
+		<client>0</client>
 	</update>
 </updates>
