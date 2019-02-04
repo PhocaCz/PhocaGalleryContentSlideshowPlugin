@@ -16,6 +16,8 @@ Phoca Gallery Content Slideshow Plugin is a Joomla! plugin which displays slides
 
 [Phoca Gallery Content Slideshow Plugin](https://www.phoca.cz/phocagallery-slideshow-plugin)
 
+[Phoca Gallery Info Page](https://www.phoca.cz/project/phocagallery-joomla-gallery)
+
 
 
 ## Documentation
