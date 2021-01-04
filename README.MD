@@ -2,7 +2,7 @@
 
 
 
-![Phoca Gallery Content Slideshow Plugin](https://github.com/PhocaCz/PhocaGalleryContentSlideshowPlugin/blob/master/phocagalleryslideshow.png)
+![Phoca Gallery Content Slideshow Plugin](https://github.com/PhocaCz/PhocaGalleryContentSlideshowPlugin/blob/master/phocagalleryslideshow.png?raw=true)
 
 # Phoca Gallery Content Slideshow Plugin
 
@@ -23,6 +23,8 @@ Phoca Gallery Content Slideshow Plugin is a Joomla! plugin which displays slides
 ## Documentation
 
 [Documentation](https://www.phoca.cz/documentation/category/19-phoca-gallery-slideshow-plugin)
+
+
 
 
 
@@ -52,7 +54,7 @@ Phoca Gallery Content Slideshow Plugin is a Joomla! plugin which displays slides
 
 ## Version
 
-4.3.11
+4.4.0
 
 
 

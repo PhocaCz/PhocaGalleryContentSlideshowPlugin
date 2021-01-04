@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.plugin.plugin');
-
+use Joomla\CMS\HTML\HTMLHelper;
 
 class plgContentPhocaGallerySlideshow extends JPlugin
 {
@@ -243,7 +243,8 @@ if (!empty($images)) {
 	if ($view == 'article' || $view == 'featured' || $view == 'item' ||($view == 'category' && $layout == 'blog')) {
 		//$document->addScript(JURI::base(true).'/components/com_phocagallery/assets/jquery/jquery-1.6.4.min.js');
 		JHtml::_('jquery.framework', false);
-		$document->addScript(JURI::base(true).'/components/com_phocagallery/assets/fadeslideshow/fadeslideshow.js');
+		//$document->addScript(JURI::base(true).'/components/com_phocagallery/assets/fadeslideshow/fadeslideshow.js');
+		HTMLHelper::_('script', 'media/com_phocagallery/js/fadeslideshow/fadeslideshow.js', array('version' => 'auto'));
 		$document->addScriptDeclaration($script);
 	}
 
