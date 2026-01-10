@@ -1,0 +1,105 @@
+Phoca Gallery Content Slideshow Plugin – Community-Patch
+=======================================================
+
+Überblick
+---------
+Dieses Paket ist ein community-gepflegter Patch für das ursprüngliche
+„Phoca Gallery Content Slideshow Plugin“ von Jan Pavelka (phoca.cz).
+
+Der Patch stellt die volle Slideshow-Funktionalität unter
+Joomla 5 / Joomla 6 sowie PHP 8.x wieder her.
+
+Die originale Phoca-Gallery-Komponente wird weiterhin benötigt.
+
+
+Was wurde geändert
+------------------
+Gegenüber der Originalversion 4.4.0 wurden keine Funktionen entfernt.
+Folgende Modernisierungen und Korrekturen wurden vorgenommen:
+
+- Kompatibilität mit Joomla 5 / Joomla 6
+- Kompatibilität mit PHP 8.x
+- Ersetzung der fehlenden Legacy-JavaScript-Abhängigkeit
+  (fadeslideshow.js) durch eine mitgelieferte, moderne
+  Slideshow-Implementierung
+- Initialisierung der Slideshow erst nach DOMContentLoaded
+- Responsive Slideshow-Container:
+  - Desktop: fixe Breite und Höhe gemäss Plugin-Tag
+  - Mobile Geräte: automatische, proportionale Skalierung
+- Automatisches Pausieren bei Mouse-Over
+- Touch-Swipe-Unterstützung auf mobilen Geräten
+- Lazy Loading / verzögerte Bildverarbeitung
+- Optionale Maus-Drag-Navigation auf Desktop-Geräten
+
+
+Installation
+------------
+1. Stelle sicher, dass die Phoca-Gallery-Komponente installiert
+   und aktiviert ist.
+2. Installiere dieses Plugin im Joomla-Backend:
+   Erweiterungen → Installieren
+3. Aktiviere das Plugin:
+   Erweiterungen → Plugins → Phoca Gallery Slideshow
+
+Hinweis:
+Dieses Paket enthält absichtlich **keinen Update-Server**.
+Damit wird verhindert, dass der Community-Patch durch
+offizielle Phoca-Updates überschrieben wird.
+
+
+Verwendung in Beiträgen
+-----------------------
+Die Slideshow kann mit folgender Syntax in einen Beitrag eingefügt werden:
+
+{pgslideshow id=65|width=900|height=500|delay=3000|image=O}
+
+Häufig verwendete Parameter:
+
+- id       : ID der Phoca-Gallery-Kategorie (erforderlich)
+- width    : Breite der Slideshow in Pixeln (Desktop)
+- height   : Höhe der Slideshow in Pixeln (Desktop)
+- delay    : Zeit zwischen den Slides (Millisekunden)
+- image    : O | L | M | S (Original, Gross, Mittel, Klein)
+- desc     : none | ondemand | peekaboo | allways
+- random   : 0 | 1
+- pause    : Pause zwischen den Slides in Millisekunden
+
+Auf mobilen Geräten verkleinert sich die Slideshow automatisch,
+wobei das korrekte Seitenverhältnis erhalten bleibt.
+
+Der Parameter desc wurde für Rückwärtskompatibilität beibehalten.
+In dieser modernisierten Version werden jedoch die Bildbeschreibungen absichtlich nicht als Overlays gerendert.
+
+
+Technische Hinweise
+-------------------
+Dieses Plugin enthält eine zusätzliche JavaScript-Datei:
+
+/media/plg_content_phocagalleryslideshow/js/fadeslideshow.js
+
+Die Datei wird automatisch in das Joomla-Media-Verzeichnis installiert.
+Es sind keine Template-Anpassungen erforderlich.
+Es werden keine Joomla-Core- oder Phoca-Gallery-Core-Dateien verändert.
+
+
+Credits
+-------
+Original-Plugin:
+© Jan Pavelka – https://www.phoca.cz
+
+Community-Patch (Joomla 5/6, PHP 8.x):
+Andy Marchand (Feuerwehr Worb)
+
+
+Lizenz
+------
+GNU/GPL v2 oder höher
+
+
+Haftungsausschluss
+------------------
+Dies ist KEINE offizielle Phoca-Veröffentlichung.
+Es handelt sich um einen Community-Patch, der ohne Gewähr bereitgestellt wird.
+
+Bitte prüfe vor der Installation zukünftiger offizieller Phoca-Updates,
+ob dieser Patch weiterhin benötigt wird.

@@ -52,7 +52,7 @@ Phoca Gallery Content Slideshow Plugin is a Joomla! plugin which displays slides
 
 
 
-## Version
+## Version (Joomla! 4.x)
 
 4.4.0
 
@@ -65,3 +65,17 @@ GNU/GPL
 
 
 This project is open source project - feel free to contribute! Thank you.
+
+
+
+## Social Media
+
+- [Phoca on Facebook](https://www.facebook.com/Phoca.cz)
+
+- [Phoca on X (Twitter)](https://twitter.com/PhocaCz)
+
+- [Phoca on YouTube](https://www.youtube.com/user/phocavideos)
+
+- [Phoca on GitHub](https://github.com/PhocaCz)
+
+- [Phoca on Reddit](https://www.reddit.com/user/PhocaCz)

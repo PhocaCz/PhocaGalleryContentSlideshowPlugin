@@ -1,0 +1,28 @@
+Changelog
+=========
+
+Version 4.4.0-j6fix.1
+---------------------
+Release date: 2026-01-06
+
+Community patch based on Phoca Gallery Content Slideshow Plugin 4.4.0.
+
+Changes:
+- Added compatibility with Joomla 5 and Joomla 6
+- Added compatibility with PHP 8.x
+- Replaced missing legacy fadeslideshow JavaScript dependency
+- Bundled modern slideshow implementation (fadeslideshow.js)
+- Deferred slideshow initialization until DOMContentLoaded
+- Fixed slideshow not rendering inside article content
+- Added responsive slideshow container (automatic scaling on mobile)
+- Preserved fixed width/height behaviour on desktop
+- Added automatic pause on mouse hover
+- Added touch swipe support for mobile devices
+- Added optional mouse drag swipe support for desktop
+- Added lazy loading / deferred image handling
+- Prevented accidental overwriting by official Phoca update servers
+
+Notes:
+- This is a community-maintained patch, not an official Phoca release
+- No core Joomla or Phoca Gallery files were modified
+- Original functionality and plugin parameters are preserved

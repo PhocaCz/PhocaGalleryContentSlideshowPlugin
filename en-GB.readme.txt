@@ -1,0 +1,103 @@
+Phoca Gallery Content Slideshow Plugin – Community Patch
+=======================================================
+
+Overview
+--------
+This package is a community-maintained patch for the original
+"Phoca Gallery Content Slideshow Plugin" by Jan Pavelka (phoca.cz).
+
+The patch restores full slideshow functionality under
+Joomla 5 / Joomla 6 and PHP 8.x.
+
+The original Phoca Gallery component is still required.
+
+
+What has been changed
+---------------------
+Compared to the original version 4.4.0, no features were removed.
+The following modernizations and fixes were applied:
+
+- Joomla 5 / Joomla 6 compatibility
+- PHP 8.x compatibility
+- Replaced missing legacy JavaScript dependency (fadeslideshow.js)
+  with a bundled, modern slideshow implementation
+- Slideshow initialization deferred until DOMContentLoaded
+- Responsive slideshow container:
+  - Desktop: fixed width and height as defined in the plugin tag
+  - Mobile devices: automatic proportional resizing
+- Automatic pause on mouse hover
+- Touch swipe support on mobile devices
+- Lazy loading / deferred image handling
+- Optional mouse drag swipe support on desktop
+
+
+Installation
+------------
+1. Make sure the Phoca Gallery component is installed and enabled
+2. Install this plugin via the Joomla backend:
+   Extensions → Install
+3. Enable the plugin:
+   Extensions → Plugins → Phoca Gallery Slideshow
+
+Note:
+This package does NOT include an update server.
+This is intentional, to prevent overwriting the community patch
+with official Phoca updates.
+
+
+Usage in Articles
+-----------------
+Insert the slideshow into an article using the following syntax:
+
+{pgslideshow id=65|width=900|height=500|delay=3000|image=O}
+
+Common parameters:
+
+- id       : Phoca Gallery category ID (required)
+- width    : slideshow width in pixels (desktop)
+- height   : slideshow height in pixels (desktop)
+- delay    : time between slides (milliseconds)
+- image    : O | L | M | S (Original, Large, Medium, Small)
+- desc     : none | ondemand | peekaboo | allways
+- random   : 0 | 1
+- pause    : pause between slides in milliseconds
+
+On mobile devices, the slideshow automatically scales down
+while keeping the correct aspect ratio.
+
+The desc parameter is kept for backward compatibility.
+In this modernized version, image descriptions are intentionally not rendered as overlays.
+
+
+Technical Notes
+---------------
+This plugin ships with an additional JavaScript file:
+
+/media/plg_content_phocagalleryslideshow/js/fadeslideshow.js
+
+The file is automatically installed into the Joomla media directory.
+No template changes are required.
+No Joomla core or Phoca Gallery core files are modified.
+
+
+Credits
+-------
+Original plugin:
+© Jan Pavelka – https://www.phoca.cz
+
+Community patch (Joomla 5/6, PHP 8.x):
+Andy Marchand (Feuerwehr Worb)
+
+
+License
+-------
+GNU/GPL v2 or later
+
+
+Disclaimer
+----------
+This is NOT an official Phoca release.
+It is a community patch provided as-is.
+
+Before installing future official Phoca updates, please check
+whether this patch is still required.
