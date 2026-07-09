@@ -2,12 +2,12 @@
 <extension type="plugin" group="content" method="upgrade" version="6.0">
 	<name>plg_content_phocagalleryslideshow</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>10/01/2026</creationDate>
+	<creationDate>09/07/2026</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>
 	<license>GNU/GPL</license>
-	<version>6.0.0</version>
+	<version>6.1.1</version>
 	<description>PLG_CONTENT_PHOCAGALLERYSLIDESHOW_DESCRIPTION</description>
 	<projectName>PhocaGalleryContentSlideshowPlugin</projectName>
 
@@ -16,10 +16,12 @@
 	</media>
 
 	<files>
+		<filename plugin="phocagalleryslideshow">FOSS.md</filename>
 		<filename plugin="phocagalleryslideshow">de_DE.readme.txt</filename>
 		<filename plugin="phocagalleryslideshow">en-GB.readme.txt</filename>
 		<filename plugin="phocagalleryslideshow">changelog.txt</filename>
 		<filename plugin="phocagalleryslideshow">index.html</filename>
+		<filename plugin="phocagalleryslideshow">LICENSE</filename>
 		<filename plugin="phocagalleryslideshow">phocagalleryslideshow.php</filename>
 		<filename plugin="phocagalleryslideshow">manifest.xml</filename>
 	</files>
