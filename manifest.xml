@@ -17,7 +17,7 @@
 		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
-		<targetplatform name="joomla" version="4\.*"/>
+		<targetplatform name="joomla" version="3.([89]|10)"/>
 		<client>site</client>
 	</update>
 	<update>
@@ -31,27 +31,7 @@
 		<downloads>
 			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaGalleryContentSlideshowPlugin/releases/download/6.1.1/plg_content_phocagalleryslideshow_v6.1.1.zip</downloadurl>
 		</downloads>
-		<tags>
-			<tag>stable</tag>
-		</tags>
-		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
-		<maintainerurl>https://www.phoca.cz/</maintainerurl>
-		<section>Updates</section>
-		<targetplatform name="joomla" version="5\.*"/>
-		<client>site</client>
-	</update>
-	<update>
-		<name><![CDATA[ Phoca Gallery Content Slideshow Plugin ]]></name>
-		<description><![CDATA[ Phoca Gallery Content Slideshow Plugin is a Joomla! plugin which displays slideshow of images from selected Phoca Gallery category in an article content. ]]></description>
-		<element>phocagalleryslideshow</element>
-		<folder>content</folder>
-		<type>plugin</type>
-		<version>6.1.1</version>
-		<infourl title="Phoca Gallery Content Slideshow Plugin 6.1.1">https://www.phoca.cz/</infourl>
-		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaGalleryContentSlideshowPlugin/releases/download/6.1.1/plg_content_phocagalleryslideshow_v6.1.1.zip</downloadurl>
-		</downloads>
-		<sha512>a04f8214429224e9512ed276426d3248bdb58f1869c2d45ec988abf3983059f894db73968b239337ae563cf66eb8f0aa344310a5fa83a9508e328b37967b822f</sha512>
+		<sha512>2720d2bb8442b0b2ce0cf042134c22c2544ca9e9be99e8ad01557a5603d73e9f0b2d76bd5acc20949cb9496434953ec7f29e5b34d6ba1d72ba60e9918bdd181b</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
